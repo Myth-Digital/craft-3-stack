@@ -121,13 +121,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Myth-Digital/craft-3-stack.git"
+        "url": "git+https://github.com/myth-digital/craft-3-stack.git"
     },
     "author": "James Nesbitt",
     "authorUrl": "https://mythdigital.co",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/Myth-Digital/craft-3-stack/issues"
+        "url": "https://github.com/myth-digital/craft-3-stack/issues"
     },
-    "homepage": "https://github.com/Myth-Digital/craft-3-stack#readme"
+    "homepage": "https://github.com/myth-digital/craft-3-stack#readme"
 }

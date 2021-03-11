@@ -9,7 +9,7 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) boilerplate [Myth Dig
 
 ## Install
 
-1. `composer create-project Myth-Digital/craft-3-stack`
+1. `composer create-project myth-digital/craft-3-stack`
 2. Don't run, `./craft setup`, instead manually edit the `.env` file.
 3. Once the `.env` is filled in, run `./craft install`
 
@@ -37,8 +37,8 @@ If project already exists, this will pull, migrate and apply project config and 
    - [Javascript Cookie](https://github.com/js-cookie/js-cookie)
    - [Vanilla Lazyload](https://github.com/verlok/vanilla-lazyload)
 - Templates
-   - [Blocks](https://github.com/Myth-Digital/craft-3-stack#blocks)
-   - [Components](https://github.com/Myth-Digital/craft-3-stack#components)
+   - [Blocks](https://github.com/myth-digital/craft-3-stack#blocks)
+   - [Components](https://github.com/myth-digital/craft-3-stack#components)
    - Pages (With dynamic page types)
    - Email
    - Exceptions
