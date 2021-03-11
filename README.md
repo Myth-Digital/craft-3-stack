@@ -12,6 +12,8 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) boilerplate [Myth Dig
 1. `composer create-project myth-digital/craft-3-stack`
 2. Don't run, `./craft setup`, instead manually edit the `.env` file.
 3. Once the `.env` is filled in, run `./craft install`
+4. Generate the security key using `./craft setup/security-key`
+5. Replace config/project-stack with newly created config/project folder `rm -rf config/project && mv config/project-stack config/project`
 
 ## npm Scripts
 
