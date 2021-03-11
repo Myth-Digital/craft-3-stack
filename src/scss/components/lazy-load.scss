@@ -1,0 +1,10 @@
+.lazy-load {
+    @apply 
+        transition
+        opacity-0;
+    &--loaded {
+        @apply 
+          opacity-100 
+          delay-300;
+    }
+}

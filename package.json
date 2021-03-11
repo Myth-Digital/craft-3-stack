@@ -1,0 +1,133 @@
+{
+    "name": "craft-3-stack",
+    "version": "3.0.0",
+    "description": "",
+    "main": "index.js",
+    "env": {
+        "local": "http://craft-3.local"
+    },
+    "paths": {
+        "dependencies": "node_modules/",
+        "public": "public/",
+        "templates": "templates/",
+        "dist": {
+            "base": "dist/",
+            "css": "dist/css/",
+            "js": "dist/js/",
+            "images": "dist/images/",
+            "favicon": "dist/images/favicon/"
+        },
+        "assets": {
+            "base": "src/",
+            "scss": "src/scss/",
+            "js": "src/js/",
+            "images": "src/images/",
+            "fonts": "src/fonts/"
+        }
+    },
+    "critical": {
+        "dest": "_criticalCss/",
+        "elements": [
+            {
+                "uri": "",
+                "slug": "__home__"
+            }
+        ]
+    },
+    "purgeCss": {
+        "whitelist": [],
+        "whitelistPatterns": [
+            "lazy-load.*",
+            "flickity.*",
+            "aos.*"
+        ]
+    },
+    "cssDependencies": [],
+    "dependencies": {
+        "@tailwindcss/typography": "^0.2.0",
+        "alpinejs": "^2.8.1",
+        "fg-loadcss": "^3.1.0",
+        "js-cookie": "^2.2.1",
+        "tailwindcss-aspect-ratio": "^2.0.0",
+        "tailwindcss-typography": "^3.1.0",
+        "vanilla-lazyload": "^17.3.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.13.1",
+        "@babel/preset-env": "^7.13.5",
+        "@vue/compiler-sfc": "^3.0.6",
+        "autoprefixer": "^9.2.4",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^8.2.2",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "browser-sync": "^2.26.14",
+        "critical": "^2.0.6",
+        "css-loader": "^5.0.2",
+        "cssnano": "^4.1.10",
+        "eslint": "^7.20.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-prettier": "^6.15.0",
+        "eslint-plugin-html": "^6.1.1",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "favicons": "^6.2.1",
+        "file-loader": "^6.2.0",
+        "mini-css-extract-plugin": "^1.3.8",
+        "postcss": "^8.2.6",
+        "purgecss": "^2.3.0",
+        "rev-del": "^2.0.0",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
+        "axios": "^0.18.0",
+        "babel-preset-vue-app": "^2.0.0",
+        "core-js": "^3.6.3",
+        "cross-env": "^5.2.0",
+        "flexbox-grid-mixins": "^0.1.4",
+        "flexboxgrid-sass": "^8.0.5",
+        "jquery": "^3.3.1",
+        "laravel-mix": "^4.0.14",
+        "node-sass": "^4.11.0",
+        "normalize-scss": "^7.0.1",
+        "resolve-url-loader": "^3.0.0",
+        "sass": "^1.16.1",
+        "sass-loader": "^7.1.0",
+        "slick-carousel": "^1.8.1",
+        "style-loader": "^0.23.1",
+        "stylus": "^0.54.5",
+        "stylus-loader": "^3.0.2",
+        "vfc": "^2.0.0",
+        "vue": "^2.5.22",
+        "vue-awesome": "^3.3.1",
+        "vue-confetti": "^2.0.8",
+        "vue-content-loader": "^0.2.1",
+        "vue-currency-filter": "^3.4.2",
+        "vue-currency-symbol": "^1.0.2",
+        "vue-infinite-loading": "^2.4.4",
+        "vue-jam-icons": "^1.0.1",
+        "vue-loading-spinner": "^1.0.11",
+        "vue-money-format": "^1.1.1",
+        "vue-slick": "^1.1.15",
+        "vue-stripe-elements-plus": "^0.2.9",
+        "vue-stripe-payment": "^0.2.0",
+        "vue-template-compiler": "^2.5.22",
+        "vuex": "^3.1.0"
+    },
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "build": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Myth-Digital/craft-3-stack.git"
+    },
+    "author": "James Nesbitt",
+    "authorUrl": "https://mythdigital.co",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Myth-Digital/craft-3-stack/issues"
+    },
+    "homepage": "https://github.com/Myth-Digital/craft-3-stack#readme"
+}

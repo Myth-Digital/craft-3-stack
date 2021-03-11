@@ -1,0 +1,59 @@
+{
+  "name": "Myth-Digital/craft-3-stack",
+  "description": "Craft CMS",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "project"
+  ],
+  "license": "MIT",
+  "homepage": "https://craftcms.com/",
+  "type": "project",
+  "support": {
+    "email": "support@craftcms.com",
+    "issues": "https://github.com/craftcms/cms/issues",
+    "forum": "https://craftcms.stackexchange.com/",
+    "source": "https://github.com/craftcms/cms",
+    "docs": "https://craftcms.com/docs",
+    "rss": "https://craftcms.com/changelog.rss"
+  },
+  "require": {
+    "ext-gd": "^7.3",
+    "craftcms/cms": "3.6.10",
+    "vlucas/phpdotenv": "2.4.0",
+    "verbb/super-table": "2.6.7",
+    "nystudio107/craft-seomatic": "3.3.33",
+    "clubstudioltd/craft-asset-rev": "6.0.2",
+    "nystudio107/craft-minify": "1.2.10",
+    "verbb/default-dashboard": "1.0.8",
+    "craftcms/redactor": "2.8.5",
+    "doublesecretagency/craft-cpcss": "^2.2.1",
+    "solspace/craft-freeform": "3.10.8",
+    "putyourlightson/craft-blitz": "3.7.0",
+    "spacecatninja/imager-x": "v3.3.0",
+    "vaersaagod/dospaces": "^1.1",
+    "sebastianlenz/linkfield": "1.0.25"
+  },
+  "autoload": {
+    "psr-4": {
+      "modules\\": "modules/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.3"
+    }
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "npm install",
+      "@composer dump-autoload -o",
+      "@php craft setup/welcome"
+    ]
+  }
+}
