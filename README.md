@@ -73,7 +73,7 @@ If project already exists, this will pull, migrate and apply project config and 
 - Extras
    - Scripts (To pull assets, db etc from different environments)
    - .gitignore
-      - Gulp / Packages
+      - Packages
       - SASS
       - Javascript
       - OS Files

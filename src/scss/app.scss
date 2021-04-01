@@ -1,8 +1,12 @@
 @tailwind base;
 @tailwind components;
 
-@import 'utilities/*';
-@import 'components/*';
+@import 'utilities/rem';
+@import 'utilities/font-face';
+
+@import 'components/lazy-load';
+@import 'components/links';
+
 @import 'base';
 
 @tailwind utilities;
