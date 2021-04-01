@@ -14,6 +14,7 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) boilerplate [Myth Dig
 3. Once the `.env` is filled in, run `./craft install`
 4. Generate the security key using `./craft setup/security-key`
 5. Replace config/project-stack with newly created config/project folder `rm -rf config/project && mv config/project-stack config/project`
+6. Run the project sync command to sync the db config `./craft project-config/apply`
 
 ## npm Scripts
 
@@ -61,13 +62,13 @@ If project already exists, this will pull, migrate and apply project config and 
    - Asset Rev
    - Blitz
    - Default Dashboard
-   - Freeform
    - Imager X
    - Link Field
    - Minify
    - Redactor
-   - Retour
    - SEOMatic
+   - DO Spaces
+   - CP CSS
    - Super Table
 - Extras
    - Scripts (To pull assets, db etc from different environments)
