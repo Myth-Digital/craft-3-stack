@@ -9,7 +9,7 @@ if (mix.inProduction()){
 			rules: [
 				{
 					test: /\.jsx?$/,
-					include: [/(assets\/js)/],
+					include: [/(src\/js)/],
 					use: [
 						{
 							loader: 'babel-loader',
@@ -26,9 +26,10 @@ if (mix.inProduction()){
 }
 
 mix
-	.js('src/index.js', 'public/dist/js/app.js')
+	.js('src/js/vue.js', 'public/dist/js')
+	.js('src/js/app.js', 'public/dist/js')
 	.extract([
-		'axios', 'vue', 'vuex'
+		'axios', 'vue', 'vuex', 'alpinejs'
 	])
 	.sass('src/scss/app.scss', 'public/dist/css/app.css')
 	.options({
