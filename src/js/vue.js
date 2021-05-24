@@ -1,12 +1,18 @@
-import { createApp, defineAsyncComponent } from 'vue';
+import Vue from 'vue';
+import store from './store';
+import http from './http';
 
-// const Example = defineAsyncComponent (() => import(/* webpackChunkName: "Example" */'../vue/Example.vue'));
+// Tasks
+import Example from '../vue/Example.vue';
 
-const app = createApp({
-	delimiters: ['${', '}'],
-	components: {
-		// Example
-	}
+// Polyfill the Standard Library functions
+require('core-js');
+
+window.Vue = Vue;
+
+Vue.component('example', Example);
+
+const app = new Vue({
+	el: '#app',
+	store
 });
-
-app.mount('#app');

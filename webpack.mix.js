@@ -26,12 +26,11 @@ if (mix.inProduction()){
 }
 
 mix
-	.js('src/js/vue.js', 'public/dist/js')
-	.js('src/js/app.js', 'public/dist/js')
-	.extract([
-		'axios', 'vue', 'vuex', 'alpinejs'
-	])
+	.js('src/index.js', 'public/dist/js')
 	.sass('src/scss/app.scss', 'public/dist/css/app.css')
+	.extract([
+		'axios', 'vue', 'vuex'
+	])
 	.options({
 		processCssUrls: false,
 		postCss: [ tailwindcss('./tailwind.config.js') ]
