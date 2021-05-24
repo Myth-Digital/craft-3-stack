@@ -28,7 +28,6 @@ return [
       'preserveImageColorProfiles' => true,
       'preserveCmykColorspace' => true,
       'optimizeImageFilesize' => false,
-      'imageDriver' => 'imagick',
       // Account
       'useEmailAsUsername' => true,
       'autoLoginAfterAccountActivation' => true,
