@@ -3,6 +3,12 @@ const colors = require('tailwindcss/colors');
 const alpha = { 100: 'FF', 90: 'E6', 80: 'CC', 70: 'B3', 60: '99', 50: '80', 40: '66', 30: '4D', 20: '33', 10: '1A' };
 
 module.exports = {
+  purge: [
+    './templates/**/*.twig',
+    './src/**/*.vue',
+    './src/**/*.jsx',
+    './src/**/*.js'
+  ],
   theme: {
     extend: {
       colors: {
