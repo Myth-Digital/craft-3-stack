@@ -68,7 +68,6 @@ yarn-error.log*
 *.sw*
 
 # Web Assets
-public/dist/js
-public/dist/css/app.css
-public/dist/css/app.css.map
+public/dist/js/*
+public/dist/css/*
 mix-manifest.json
