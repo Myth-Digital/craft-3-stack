@@ -66,3 +66,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Web Assets
+public/dist/js
+public/dist/css/app.css
+public/dist/css/app.css.map
+mix-manifest.json
