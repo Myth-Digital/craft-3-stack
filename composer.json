@@ -20,7 +20,7 @@
   },
   "require": {
     "craftcms/cms": "3.7.10",
-    "vlucas/phpdotenv": "5.3.0",
+    "vlucas/phpdotenv": "2.4.0",
     "verbb/super-table": "2.6.8",
     "nystudio107/craft-seomatic": "3.4.2",
     "clubstudioltd/craft-asset-rev": "6.0.2",
