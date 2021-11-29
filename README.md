@@ -13,7 +13,7 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) boilerplate [Myth Dig
 2. Don't run, `./craft setup`, instead manually edit the `.env` file.
 3. Once the `.env` is filled in, run `./craft install`
 4. Generate the security key using `./craft setup/security-key`
-5. Replace config/project-stack with newly created config/project folder `rm -rf config/project && mv config/project-stack config/project`
+5. Replace newly created config/project with config/project-stack folder `rm -rf config/project && mv config/project-stack config/project`
 6. Run the project sync command to sync the db config `./craft project-config/apply`
 
 ## npm Scripts
