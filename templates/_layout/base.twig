@@ -52,8 +52,17 @@
             {% block body %}{% endblock %}
          </div>
          
-         {# Javascript #}
-         <script src="{{ siteUrl }}dist/{{ rev('js/app.js') }}" defer></script>
+         {# 
+            Javascript
+            Change value if you wish to use Vue
+         #}
+         {% set useVue = false %}
+         {% if useVue %}
+            <script src="{{ siteUrl }}dist/{{ rev('js/manifest.js') }}"></script>
+            <script src="{{ siteUrl }}dist/{{ rev('js/vendor.js') }}"></script>
+         {% endif %}
+         
+         <script src="{{ siteUrl }}dist/{{ rev('js/index.js') }}" defer></script>
 
          {% js %}
             function app() {
