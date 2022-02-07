@@ -1,4 +1,4 @@
-# Craft CMS 3.x, Craft Commerce 3.x, Tailwind CSS, VueJS and AlpineJS
+# Craft CMS 3.x, Craft Commerce 3.x, Stripe, Tailwind CSS, VueJS and AlpineJS
 
 This is a [Craft CMS 3.x](https://github.com/craftcms/cms) and [Craft Commerce 3.x](https://github.com/craftcms/commerce) boilerplate [Myth Digital](https://myth.digital) use internally for projects. Originally inspired by [Made By Shape](https://madebyshape.co.uk) Craft 3 boilerplate.
 
@@ -6,6 +6,7 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) and [Craft Commerce 3
 
 - PHP 7.3+
 - Composer 2.x.x
+- Node 14.x.x
 
 ## Install
 
@@ -13,12 +14,31 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) and [Craft Commerce 3
 2. Don't run, `./craft setup`, instead copy and edit the `.env.example` file.
 3. Once the `.env` is completed, run `./craft install`
 4. Generate the security key using `./craft setup/security-key`
-5. Replace newly created config/project with config/project-stack folder (or config/project-stack-commerce if you want commerce) `rm -rf config/project && mv config/project-stack config/project` or `rm -rf config/project && mv config/project-stack-commerce config/project`
-6. Run the project sync command to sync the db config `./craft project-config/apply`
 
-### Remove Commerce
+### With Commerce
 
-The stack ships with Commerce. The following removal script should be ran if you do not need Commerce.
+Follow the steps below to set up Commerce with your stack.
+
+1. Replace newly created config/project with config/project-stack-commerce folder `rm -rf config/project && mv config/project-stack-commerce config/project`
+2. Run the project sync command to sync the db config `./craft project-config/apply`
+3. Copy fallback images into dist folder. `cp src/images/* public/dist/images/`
+4. Update templates directory whatever you wish your URL to be. Default is /shop.
+
+[] To Do - Add better solution for fallback images
+
+**Settings / Globals**
+Some settings are required post-install in order to finalise setup.
+
+- Enable VueJS in Globals > Site (Required for Commerce)
+- Update Shop Path global in Globals > Commerce. This should match the path of your templates directory. Ensure you use a forward slash before and after. For example: /shop/. If you wish to have the shop at root level, just enter a forward slash /.
+
+### Without Commerce
+
+The stack ships default with Commerce. 
+
+1. Replace newly created config/project with config/project-stack folder `rm -rf config/project && mv config/project-stack config/project`
+2. Run the project sync command to sync the db config `./craft project-config/apply`
+3. Run the removal script below to remove all of the commerce files.
 
 [] To Do - Build script
 
@@ -37,6 +57,7 @@ If project already exists, this will pull, migrate and apply project config and 
 ## Whats included
 
 - [Craft CMS 3.x](https://github.com/craftcms/cms)
+- [Craft Commerce 3.x](https://github.com/craftcms/commerce)
 - CSS
    - [Tailwind CSS 2.0.x](https://tailwindcss.com/)
 - Javascript
@@ -76,6 +97,9 @@ If project already exists, this will pull, migrate and apply project config and 
    - DO Spaces
    - CP CSS
    - Super Table
+   - Webpayments
+   - Commerce Widgets
+   - Stripe
 - Extras
    - Scripts (To pull assets, db etc from different environments)
    - .gitignore

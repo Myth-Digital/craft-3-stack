@@ -42,11 +42,7 @@
 
       </head>
 
-      <body 
-         x-data="app()"
-         x-init="viewportHeight()"
-         x-on:resize.window="viewportHeight()"
-      >
+      <body>
 
          <div id="app">
             {% block body %}{% endblock %}
@@ -54,27 +50,15 @@
          
          {# 
             Javascript
-            Change value if you wish to use Vue
+            Change global setting if you wish to use Vue
          #}
-         {% set useVue = false %}
+         {% set useVue = site.enableVuejs %}
          {% if useVue %}
             <script src="{{ siteUrl }}dist/{{ rev('js/manifest.js') }}"></script>
             <script src="{{ siteUrl }}dist/{{ rev('js/vendor.js') }}"></script>
          {% endif %}
          
          <script src="{{ siteUrl }}dist/{{ rev('js/index.js') }}" defer></script>
-
-         {% js %}
-            function app() {
-               return {
-                  viewportHeight: null,
-                  viewportHeight() {
-                     this.viewportHeight = window.innerHeight * 0.01; 
-                     document.documentElement.style.setProperty('--vh', `${this.viewportHeight}px`);
-                  }
-               }
-            }
-         {% endjs %}
 
       </body>
 

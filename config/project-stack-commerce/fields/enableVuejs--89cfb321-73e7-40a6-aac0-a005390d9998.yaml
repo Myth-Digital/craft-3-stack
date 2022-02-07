@@ -1,0 +1,14 @@
+columnSuffix: xmiuyoxe
+contentColumnType: boolean
+fieldGroup: a6548a8e-edd2-4cbb-9200-db7de2726f75 # Common
+handle: enableVuejs
+instructions: ''
+name: 'Enable VueJS'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

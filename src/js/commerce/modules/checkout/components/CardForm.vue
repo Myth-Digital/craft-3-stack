@@ -46,7 +46,7 @@ export default {
     },
     data() {
         return {
-            publicPath: process.env.PRIMARY_SITE_URL,
+            publicPath: process.env.SITE_URL,
             isLoading: false,
             cardHolderName: '',
             cardNumber: '',

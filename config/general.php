@@ -42,6 +42,7 @@ return [
       'backupOnUpdate' => true,
       'errorTemplatePrefix' => '_',
       'enableGql' => false,
+      'apiUrl' => getenv('SITE_URL') . 'api',
       // Aliases
       'aliases' => [
          '@assetBaseUrl' => getenv('ASSETS_URL'),
