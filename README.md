@@ -26,11 +26,11 @@ Follow the steps below to set up Commerce with your stack.
 
 [] To Do - Add better solution for fallback images
 
-**Settings / Globals**
+**Settings / Globals**\
 Some settings are required post-install in order to finalise setup.
 
-- Enable VueJS in Globals > Site (Required for Commerce)
-- Update Shop Path global in Globals > Commerce. This should match the path of your templates directory. Ensure you use a forward slash before and after. For example: /shop/. If you wish to have the shop at root level, just enter a forward slash /.
+- Enable VueJS in `Globals > Site` (Required for Commerce)
+- Update Shop Path global in `Globals > Commerce`. This should match the path of your templates directory. Ensure you use a forward slash before and after. For example: `/shop/`. If you wish to have the shop at root level, just enter a forward slash `/`.
 
 ### Without Commerce
 
