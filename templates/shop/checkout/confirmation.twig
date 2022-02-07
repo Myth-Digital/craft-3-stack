@@ -1,0 +1,152 @@
+{#
+# Template
+# ---------------
+#}
+
+{% extends "commerce/_layout/commerce" %}
+
+{% block commerceContent %}
+		{%- minify -%}
+
+			{# ------- Variables ------- #}
+
+			{% set number = craft.app.request.param('number') %}
+			{% set order = craft.orders.number(number).one() %}
+			{% set customer = craft.commerce.customers.customer() %}
+			{% set transaction = order.getTransactions() %}
+			{% set responseArray = transaction[0].response|json_decode %}
+
+			{# 
+				Check if user is logged in and order is completed
+			#}
+			{% if not currentUser %}
+				{% redirect '/' %}
+			{% elseif not number or order.isCompleted == false %}
+				{% redirect commerce.shopPath ~ 'account' %}
+			{% endif %}
+
+			{# ------- Template ------- #}
+
+			<div class="container mx-auto my-20">
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+
+					<div class="orderConfirmation md:col-span-7">
+
+						<div class="flex items-center pb-6 border-b border-gray-100 gap-5">
+							<svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M37 74C16.5649 74 0 57.4351 0 37C0 16.5649 16.5649 0 37 0C57.4351 0 74 16.5649 74 37C74 57.4351 57.4351 74 37 74ZM33.3111 51.8L59.4701 25.6373L54.2383 20.4055L33.3111 41.3364L22.8438 30.8691L17.612 36.1009L33.3111 51.8Z" fill="#38B2AC"/>
+							</svg>
+							<h2 class="text-black font-semibold text-4xl">Order confirmation</h2>
+						</div>
+
+						<div class="responseMessage pt-6 pb-10 space-y-5">
+							<h3 class="text-black font-semibold text-xl">Thank you for your purchase</h3>
+							<p class="text-gray-400 text-base">We appreciate your support.</p>
+						</div>
+
+						<div class="collectionInformation border rounded-md border-gray-300 p-8">
+							<h3 class="text-black font-semibold text-xl mb-10">Your Collection Information</h3>
+
+							{# {% set collectionStore = order.selectedCollectionStore.all() %}
+							{{ collectionStore.address1 }} #}
+							<div class="grid grid-cols-1 md:grid-cols-2">
+
+								<div class="collectionAddress">
+									<div class="addressIcon mb-2">
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</div>
+									<div class="collectionAddress -ml-4 text-gray-500 text-lg">
+										<ul>
+											<li>{{ order.shippingAddress.address1 }}</li>
+											<li>{{ order.shippingAddress.city }}, {{ order.shippingAddress.zipCode }}</li>
+											<li>{{ order.shippingAddress.countryText }}</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="collectionTime">
+									<div class="addressIcon mb-2">
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 2C6.486 2 2 6.486 2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 6.486 17.514 2 12 2ZM12 20C7.589 20 4 16.411 4 12C4 7.589 7.589 4 12 4C16.411 4 20 7.589 20 12C20 16.411 16.411 20 12 20Z" fill="black"/>
+											<path d="M13 7H11V12.414L14.293 15.707L15.707 14.293L13 11.586V7Z" fill="black"/>
+										</svg>
+									</div>
+									<div class="collectionInformation text-gray-500 text-lg">
+										<span class="block">{{ order.orderCollectionTime|date('d F Y') }}</span>
+										<span>{{ order.orderCollectionTime|date('H:i') }}</span>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<a href="{{ siteUrl }}" class="flex items-center justify-center w-48 py-5 cursor-pointer text-white bg-primary hover:bg-secondary transition duration-500 mt-8">
+							Return to shop
+						</a>
+
+					</div>
+
+					<div class="summaryOfPurchase md:col-span-5 bg-gray-50 p-8">
+						<h3 class="text-black text-xl mb-5">Summary of your puchase</h3>
+						<div class="productSummary pb-4 mb-8 space-y-5">
+							{% for item in order.lineItems %}
+								{% set product = item.purchasable.product %}
+								{% set variants = item.purchasable %}
+								{% set productImages = product.productImages %} 
+
+								{% set thumb = {
+										mode: 'crop',
+										height: 400,
+										width: 400,
+										position: 'center-center',
+										quality: 85
+								}%}
+								<div class="product-compact flex gap-5 border-b border-gray-200 pb-4">
+									{% if productImages %}
+										{% for image in productImages.limit(1) %}
+										<div class="w-3/12">
+											<img src="{{ image.getUrl(thumb) }}" alt="{{ product.title }}" class="w-full h-full" />
+										</div>
+										{% endfor %}
+									{% endif %}
+									
+									<div class="product-compact_details w-9/12 flex items-center justify-between">
+										<div class="product_compact_details_title">
+											<div class="font-semibold">{{ item.description }}</div>
+											<span class="text-gray-400 text-xs">SKU: {{item.sku}}</span>
+										</div>
+										<span class="">Qty {{ item.qty }}</span>
+										<div class="product-compact_price text-black">{{ item.subTotal|commerceCurrency(order.currency) }}</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+
+						<div class="costSummary space-y-5">
+							<div class="totalCost flex items-center justify-between">
+								<span class="text-lg">Total</span>
+								<span>£{{ order.storedTotalPrice|number_format(2) }}</span>
+							</div>
+							<div class="paymentMethod flex items-center justify-between">
+								<span class="text-lg">Payment Method</span>
+								<span class="text-xs">{{ responseArray.paymentMethod.card.cardNickname }}</span>
+							</div>
+							<div class="shippingType flex items-center justify-between">
+								<span class="text-lg">{{ order.shippingMethodName }}</span>
+								<span class="text-green-700 text-xl">Free</span>
+							</div>
+							<div class="totalCost flex items-center justify-between">
+								<span class="text-xl text-green-700 font-bold">Paid</span>
+								<span class="text-xl text-green-700 font-bold">£{{ order.storedTotalPrice|number_format(2) }}</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		{%- endminify -%}
+{% endblock %}

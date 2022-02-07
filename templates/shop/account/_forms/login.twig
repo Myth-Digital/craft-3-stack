@@ -1,0 +1,31 @@
+<form class="form-elements" method="post" accept-charset="UTF-8">
+    {{ csrfInput() }}
+    {{ actionInput('users/login') }}
+    {{ redirectInput(redirect_input) }}
+
+    <div class="my-5">
+        <label class="font-bold w-full block pb-2" for="email">Email Address</label>
+        <input id="loginName" class="w-full" type="text" name="loginName" placeholder="email@domain.com"
+            value="{{ craft.app.user.getRememberedUsername() }}">
+    </div>
+
+    <div class="my-5">
+        <label class="font-bold w-full block pb-2" for="password">Password</label>
+        <input id="password" class="w-full" type="password" name="password">
+        <a href="{{ url('customer/forgot-password') }}" class="float-right mt-2">Forgot password?</a>
+    </div>
+
+    <div class="flex mt-2 items-center">
+        <input class="mr-4 w-6 h-6" type="checkbox" name="rememberMe" value="1">
+        <label for="rememberMe" class="text-md">Remember my login</label><br>
+    </div>
+    
+    {% if errorMessage is defined %}
+      <label class="bg-red-100 bg-opacity-300 text-primary p-5 rounded-sm mt-5 w-full block">{{ errorMessage }}</label>
+    {% endif %}
+
+    <div class="my-8">
+      <button class="btn btn-secondary btn-solid mb-2 w-full" type="submit">Login{% if redirect_input == 'checkout/payment' %} &amp; Checkout{% endif %}</button>
+      {% if redirect_input == 'checkout/payment' %}<a href="{{ url('checkout/payment?type=guest') }}" class="btn btn-light w-full" type="submit">Continue as a guest</a>{% endif %}
+    </div>
+</form>

@@ -1,0 +1,63 @@
+{#
+# Checkout payment template
+# ---------------
+#}
+
+{% extends "_commerce/_layout/checkout" %}
+
+{% block checkoutContent %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+
+			{# 
+				Check if cart has items 
+			#}
+			{% if cart is not defined %}
+				{% set cart = craft.commerce.carts.cart %}
+				{% if cart.isEmpty %}
+					{% redirect commerce.shopPath %}
+				{% endif %}
+			{% endif %}
+
+			{# 
+				Check if cart is guest checkout 
+			#}
+			{% set cartType = craft.app.request.param('type') %}
+
+			{% if not currentUser %}
+				{% if cartType == 'guest' %}
+					{% set isGuest = 'true' %}
+					{% set hasOtherPaymentSources = 'false' %}
+				{% else %}
+					{% redirect commerce.shopPath ~ 'account/login?redirect=' ~ commerce.shopPath ~ 'checkout/payment' %}
+				{% endif %}
+			{% else %}
+				{% set isGuest = 'false' %}
+				{% set paymentSources = craft.commerce.paymentSources.getAllPaymentSourcesByUserId(currentUser.id) %}
+				{% set hasOtherPaymentSources = paymentSources|length > 0 ? 'true' : 'false' %}
+			{% endif %}
+
+			{# 
+				Set default gateway 
+			#}
+			{% set gateway = craft.commerce.gateways.allCustomerEnabledGateways|first %}
+			{% set pubKey = getenv('STRIPE_PUBLISHABLE_KEY') %}
+      
+      {# ------- Template ------- #}
+			
+			<div class="max-w-6xl mx-auto py-10 flex flex-col-reverse sm:flex-row gap-10 px-10">
+				<div class="sm:w-2/3">
+					<checkout-loading></checkout-loading>
+					<checkout-steps show-account="{{ isGuest == 'true' ? 'true' : hasOtherPaymentSources == 'true' ? 'true' }}"></checkout-steps>
+					<checkout-account guest-checkout="{{ isGuest }}"></checkout-account>
+					<checkout-delivery guest-checkout="{{ isGuest }}"></checkout-delivery>
+					<checkout-payment guest-checkout="{{ isGuest }}" gateway-id="{{ gateway.id }}" stripe-publishable-key="{{ pubKey }}" has-other-card="{{ hasOtherPaymentSources }}" return-url="{{ commerce.shopPath ~ 'checkout/confirmation?number={number}'|hash}}" cancel-url="{{ commerce.shopPath ~ 'checkout/payment'|hash}}"></checkout-payment>
+				</div>
+				<div class="sm:w-1/3">
+					<checkout-summary></checkout-summary>
+				</div>
+			</div>
+
+   {%- endminify -%}
+{% endblock %}

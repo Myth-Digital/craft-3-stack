@@ -1,0 +1,50 @@
+{#
+	# Customer profile template
+	# ---------------
+#}
+
+{% extends "customer/_layout" %}
+
+{% block customerContent %}
+  <div class="container max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between my-10">
+    {% include 'customer/_aside' %}
+    <div class="w-full md:w-2/3">
+      <h5 class="text-xl font-bold font-sans mb-4 border-b border-gray-300 block mt-5 pb-4">Your personal profile</h5>
+
+      <form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+
+        {{ getCsrfInput() }}
+        <input type="hidden" name="action" value="users/save-user">
+        <input type="hidden" name="userId" value="{{ currentUser.id }}">
+
+        {% macro errorList(errors) %}
+            {% if errors %}
+                {% for error in errors %}
+                    <p class="error-block">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endmacro %}
+
+        {% from _self import errorList %}
+
+        <fieldset class="grid gap-3 gap-y-6 grid-cols-1 sm:grid-cols-2 relative mb-5">
+            <div>
+                <label for="firstName" class="font-bold w-full block pb-2">Username</label>
+                <input id="username" type="text" name="username" value="{{ currentUser.username}}" class="w-full">
+                {% if account is defined %}
+                    {{ errorList(account.getErrors('username')) }}
+                {% endif %}
+            </div>
+            <div>
+                <label for="firstName" class="font-bold w-full block pb-2">First name</label>
+                <input id="firstName" type="text" name="firstName" value="{{ currentUser.firstName}}" class="w-full">
+            </div>
+            <div>
+                <label for="lastName" class="font-bold w-full block pb-2">Last name</label>
+                <input id="lastName" type="text" name="lastName" value="{{ currentUser.lastName }}" class="w-full">
+            </div>
+        </fieldset>
+        <input class="btn btn-secondary btn-solid" type="submit" value="Save changes" />
+    </div>
+  </div>
+{% endblock %}

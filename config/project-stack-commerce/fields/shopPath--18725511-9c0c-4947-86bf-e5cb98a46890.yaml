@@ -1,0 +1,19 @@
+columnSuffix: kdcasymv
+contentColumnType: text
+fieldGroup: f348b0c6-b79b-4197-b9b4-054934d817f6 # Commerce
+handle: shopPath
+instructions: ''
+name: 'Shop Path'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,14 @@
+{% if currentUser %}
+  {% redirect '/customer' %}
+{% endif %}
+
+{% extends '_layout' %}
+
+{% block content %}
+    <hr />
+    <div class="container max-w-2xl mx-auto py-10">
+      <p class="block">Your Account</p>
+      <h2 class="mb-14 block">CREATE AN ACCOUNT</h2>
+      {% include 'customer/_forms/signup' with { redirect_input: '/customer?isRegistered=true' } %}
+    </div>
+{% endblock %}

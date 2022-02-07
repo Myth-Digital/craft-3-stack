@@ -1,0 +1,24 @@
+{#
+# Commerce template
+# ---------------
+#}
+
+{% extends "_commerce/_layout/commerce" %}
+
+{% block commerceContent %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+
+      {% set products = craft.products %}
+
+      {# ------- Template ------- #}
+
+      <div class="flex flex-col md:flex-row px-10 py-5">
+         <div class="w-full flex-1">
+            {% include "_commerce/_blocks/grid" with { products: products, grid: 'grid-cols-3' } %}
+         </div>
+      </div>
+
+   {%- endminify -%}
+{% endblock %}

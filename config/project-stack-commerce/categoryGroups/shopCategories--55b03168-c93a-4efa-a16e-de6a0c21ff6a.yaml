@@ -1,0 +1,41 @@
+defaultPlacement: end
+fieldLayouts:
+  166962db-20b7-4eba-9b9d-2cecefc1f45c:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: shopCategories
+name: 'Shop Categories'
+siteSettings:
+  06fb793a-57ef-483e-8415-675d2cfa2fd8: # Craft 3
+    hasUrls: true
+    template: _commerce/_category
+    uriFormat: '{parent.uri ? parent.uri : commerce.shopPath}/{slug}'
+structure:
+  maxLevels: null
+  uid: 6b296dd9-5987-47fa-9e51-17ed86f82d24

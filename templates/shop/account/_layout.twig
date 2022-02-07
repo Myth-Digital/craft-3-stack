@@ -1,0 +1,37 @@
+{#
+	# Customer layout template
+	# ---------------
+#}
+{% if currentUser is empty %}
+		{% redirect '/customer/login?redirect=customer' %}
+{% endif %}
+
+{% set extraHead %}
+{# We don't want the order info to get indexed by search engines #}
+<meta name="robots" content="noindex">
+{% endset %}
+
+{% extends "_layout" %}
+
+{% block content %}
+  <hr />
+
+  <section class="py-10">
+    {% if craft.app.request.param('isRegistered') %}
+    <div class="container max-w-screen-xl mx-auto flex justify-between mb-10">
+      <label class="bg-green-100 bg-opacity-300 text-green p-5 rounded-sm block w-full text-lg">Welcome to your new account area. Your registration has been completed successfully.</label>
+    </div>
+    {% endif %}
+    <div class="container max-w-screen-xl mx-auto flex justify-between mb-10">
+      <h3 class="font-sans">Hello, {{ currentUser.firstName }}</h3>
+      <a href="{{ url('logout') }}" class="text-xl flex justify-between"><i data-jam="padlock" data-width="30" data-height="30"></i> Log out</a>
+    </div>
+    <hr />
+
+    {% block customerContent %}
+      {# Customer content #}
+    {% endblock %}
+
+    {% include '_components/skipTheQueue' %}
+  </section>
+{% endblock %}

@@ -1,0 +1,20 @@
+{#
+# Checkout template
+# ---------------
+#}
+
+{% extends "_commerce/_layout/base" %}
+
+{% block commerceLayout %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+      
+      {# ------- Template ------- #} 
+
+      <main>
+         {% block checkoutContent %}{% endblock %}
+      </main>
+
+   {%- endminify -%}
+{% endblock %}

@@ -1,0 +1,73 @@
+{#
+	# Customer addresses template
+	# ---------------
+#}
+
+{% extends "customer/_layout" %}
+
+{% block customerContent %}
+  <div class="container max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between my-10">
+    {% include 'customer/_aside' %}
+
+    <div class="w-full md:w-2/3 mt-5 font-bold">
+        {% set customer = craft.commerce.customers.customer %}
+        {% set primaryBillingAddress = customer.getPrimaryBillingAddress() %}
+        {% set primaryShippingAddress = customer.getPrimaryShippingAddress() %}
+
+        {% if customer.addresses|length %}
+            <h5 class="text-xl uppercase font-bold font-sans border-b border-gray-300 block pb-4">Your saved addresses</h5>
+            <div class="addressBtnCon mt-5">
+                {% for address in customer.addresses %}
+                    <div class="mb-5">
+                        <strong class="text-black">
+                            {% if primaryBillingAddress and primaryBillingAddress.id == address.id %}
+                                Primary Billing 
+                            {% elseif primaryShippingAddress and primaryShippingAddress.id == address.id  %} 
+                                Primary Shipping 
+                            {% else %} 
+                                Additional Address
+                            {% endif %}
+                        </strong>
+                    </div>
+                    <div class="text-gray-700 flex justify-between items-center">
+                        {% include 'checkout/_includes/addresses/address' with {'address': address} %}
+                        
+                        <div class="flex flex-row align-center justify-center">
+
+                            <a class="btn btn-secondary btn-solid mr-5" href="{{ url('customer/addresses/edit') }}?addressId={{ address.id }}">Edit</a>
+
+                            <form method="post" action="" class="h-full">
+                                {{ actionInput('commerce/customer-addresses/delete') }}
+                                {{ hiddenInput('id', address.id) }}
+                                {{ csrfInput() }}
+                                <input type="submit" value="Delete" class="btn btn-secondary btn-solid"/>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="flex justify-end items-center border-t border-gray-500 pt-5">
+                <a class="btn btn-secondary btn-solid" href="{{ url('customer/addresses/edit') }}">Add New Address</a>
+            </div>
+
+        {% else %}
+        
+            <h2 class="text-xl uppercase font-bold font-sans border-b border-gray-300 block pb-4">Manage your addresses</h2>
+
+            <div class="empty-index">
+                <i class="fas fa-address-book"></i>
+                <div>
+                    <br/>
+                    You don’t have any addresses yet.
+                    <div class="mt-6">
+                        <a class="button button-primary" href="{{ url('customer/addresses/edit') }}">Add a new address</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+  </div>
+{% endblock %}

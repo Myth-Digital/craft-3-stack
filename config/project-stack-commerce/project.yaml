@@ -1,0 +1,163 @@
+dateModified: 1643387999
+email:
+  fromEmail: $SITE_EMAIL
+  fromName: $SITE_NAME
+  replyToEmail: null
+  template: ''
+  transportSettings:
+    encryptionMethod: tls
+    host: $SMTP_HOSTNAME
+    password: $SMTP_PASSWORD
+    port: $SMTP_PORT
+    timeout: '10'
+    useAuthentication: '1'
+    username: $SMTP_USERNAME
+  transportType: craft\mail\transportadapters\Smtp
+meta:
+  __names__:
+    0cf15aa5-fa7d-405e-9a99-aa30b099a53c: Files # Files
+    0eb3e3a7-8bfd-4327-a265-37a740776d42: 'Credit/Debit Card' # Credit/Debit Card
+    0f92aa22-16d7-46d4-876a-135fba91d971: 'Page - Block' # Page - Block
+    1b7a3230-f24a-4ac2-a997-3289e43ddf25: 'Cookie Consent' # Cookie Consent
+    2f26868b-418e-44a0-8e53-d367d9a163eb: 'Meta & Social Data' # Meta & Social Data
+    3ea92d55-df1e-435b-aab6-ed23eeb01774: Commerce # Commerce
+    4edb6c61-ee7b-4a62-ae07-d27f2127a80a: Block # Block
+    06fb793a-57ef-483e-8415-675d2cfa2fd8: 'Craft 3' # Craft 3
+    7cc7a7b2-a349-4579-83e0-f565ffffc5e1: Products # Products
+    8ae75970-ac2b-4306-9e6f-67e9533169b5: Product # Product
+    37e8ae52-1a1f-486d-a80b-a86acc812673: 'Shop Variants' # Shop Variants
+    044a1f22-3ee8-4e03-870e-df6642a6b47b: 'Product Images' # Product Images
+    55b03168-c93a-4efa-a16e-de6a0c21ff6a: 'Shop Categories' # Shop Categories
+    73a30c01-45ca-404e-94d5-95e97b0914da: Shop # Shop
+    86a294a2-4790-4672-8c25-c80fb55fe4ef: 'Shop Variants' # Shop Variants
+    452b7e0c-8a95-46ad-94ba-88c7e4900e05: 'Shop Categories' # Shop Categories
+    90552b17-3ba7-452a-9dfd-0b13004b4659: 'Page - Block Content' # Page - Block Content
+    18725511-9c0c-4947-86bf-e5cb98a46890: 'Shop Path' # Shop Path
+    a4cade2e-b351-4d0b-8087-3328bc132811: Page # Page
+    a37b06c6-894d-4dad-a768-46c1a840e80b: 'Craft 3' # Craft 3
+    a6548a8e-edd2-4cbb-9200-db7de2726f75: Common # Common
+    b08b5d93-e934-4018-a028-6930ba8ddcb0: New # New
+    b59ae72a-8b0b-4bb9-83b9-a351b70b54a7: Site # Site
+    cc3aedd1-0bcd-4a0d-9843-8ee6c26d1563: 'Related Products' # Related Products
+    d22d8c4e-5130-4bb2-afad-a7c08be98605: Images # Images
+    d6471ab8-0d49-45bf-af5d-f0d2a860e267: 'Meta & Social Data' # Meta & Social Data
+    f64c5171-437f-45f4-ac5b-1164673e94f9: Heading # Heading
+    f348b0c6-b79b-4197-b9b4-054934d817f6: Commerce # Commerce
+    f733677f-fb59-4704-839a-4c90aa4b2d05: 'Public Schema' # Public Schema
+    feb39789-b26f-45a4-99fb-d7e4cc376989: Padding # Padding
+plugins:
+  assetrev:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  blitz:
+    edition: standard
+    enabled: true
+    licenseKey: QTOQ5VPO0CW4I2OBJ7TDM7R8
+    schemaVersion: 3.10.0
+  commerce:
+    edition: pro
+    enabled: true
+    licenseKey: LAYK2RVBQCXZZS1IR4YFYUYX
+    schemaVersion: 3.4.12
+  commerce-stripe:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.2.0
+  commerce-widgets:
+    edition: standard
+    enabled: true
+    licenseKey: PUFST7HC3SEYR7ZZ2VCAQXO5
+    schemaVersion: 2.0.1
+  cp-css:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  default-dashboard:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      excludeAdmin: ''
+      logErrors: false
+      logInfo: false
+      override: '1'
+      userDashboard: '1'
+  dospaces:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.9
+  imager-x:
+    edition: lite
+    enabled: true
+    licenseKey: 9W2EKIPTIFZIF00XH9WUO3FO
+    schemaVersion: 3.0.0
+  minify:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+  seomatic:
+    edition: standard
+    enabled: true
+    licenseKey: NAFCV2KCESW40RLH3PCDT9C9
+    schemaVersion: 3.0.11
+    settings:
+      addHrefLang: true
+      addPaginatedHreflang: true
+      addXDefaultHrefLang: true
+      cpTitlePrefix: '⚙ '
+      devModeCpTitlePrefix: '&#x1f6a7;⚙ '
+      devModeTitlePrefix: '&#x1f6a7; '
+      displayAnalysisSidebar: true
+      displayPreviewSidebar: true
+      enableJsonLdEndpoint: ''
+      enableMetaContainerEndpoint: ''
+      environment: live
+      generatorEnabled: true
+      headersEnabled: true
+      lowercaseCanonicalUrl: '1'
+      maxDescriptionLength: 155
+      maxTitleLength: 70
+      metaCacheDuration: '604800'
+      pluginName: SEO
+      regenerateSitemapsAutomatically: true
+      renderEnabled: true
+      separatorChar: '|'
+      sidebarDisplayPreviewTypes:
+        - google
+        - twitter
+        - facebook
+      siteGroupsSeparate: '1'
+      siteUrlOverride: ''
+      sitemapsEnabled: true
+      socialMediaPreviewTarget: true
+      submitSitemaps: true
+  super-table:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.2.1
+  typedlinkfield:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  web-payments:
+    edition: standard
+    enabled: true
+    licenseKey: 0XHKLJEQ28E6YF7Z4710YVTK
+    schemaVersion: 1.0.0
+system:
+  edition: pro
+  live: true
+  name: $SITE_NAME
+  schemaVersion: 3.7.8
+  timeZone: Europe/London
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: ''
+  photoVolumeUid: d22d8c4e-5130-4bb2-afad-a7c08be98605 # Images
+  requireEmailVerification: true

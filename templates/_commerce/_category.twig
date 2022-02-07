@@ -1,0 +1,32 @@
+{#
+# Commerce - Category template
+# ---------------
+#}
+
+{% extends "_commerce/_layout/commerce" %}
+
+{% block commerceContent %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+
+      {% set products = craft.products %}
+
+      {# ------- Template ------- #}
+
+      <div class="products-grid" x-data="{ hideFilters: false }">
+         {% include "_commerce/_blocks/sorting" %}
+         
+         <div class="flex flex-col md:flex-row px-10 py-5">
+            <div class="products-grid__filters w-72 flex-initial" x-show="!hideFilters">
+               {% include "_commerce/_blocks/filters" %}
+            </div>
+            
+            <div class="products-grid__products w-full flex-1">
+               {% include "_commerce/_blocks/grid" with { products: products, grid: 'grid-cols-3' } %}
+            </div>
+         </div>
+      </div>
+
+   {%- endminify -%}
+{% endblock %}

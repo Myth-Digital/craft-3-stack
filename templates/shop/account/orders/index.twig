@@ -1,0 +1,71 @@
+{#
+	# Customer orders template
+	# ---------------
+#}
+
+{% extends "customer/_layout" %}
+
+{% set orders = craft.orders
+  .customer(craft.commerce.customers.customer)
+  .isCompleted(true)
+  .withLineItems()
+  .all() %}
+
+{% if craft.app.request.param('status') == 'in-progress' %}
+  {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).orderStatus('Pending').all() %}
+{% else %}
+  {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).orderStatus('Completed').all() %}
+{% endif %}
+
+{% block customerContent %}
+  <div class="container max-w-screen-xl mx-auto flex sm:flex-row flex-col sm:justify-between my-10">
+    {% include 'customer/_aside' %}
+    <div class="w-full sm:w-2/3">
+      <h5 class="font-sans mb-10 sm:mt-0 mt-10">Your online orders</h5>
+      {% if orders|length %}
+      <table class="w-full mb-8 mt-3">
+          <thead>
+            <tr class="bg-gray-200 text-left">
+                <th class="p-2">{{ "Order" }}</th>
+                <th class="p-2">{{ "Date" }}</th>
+                <th class="p-2">{{ "Total Quantity" }}</th>
+                <th class="p-2">{{ "Total" }}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {# Get completed orders for the current customer #}
+          {% for order in orders %}
+              {# <pre>{{ dump(order) }}</pre> #}
+              {% set rowClass = cycle(['bg-gray-50', ''], loop.index0) %}
+              <tr class="{{ rowClass }}">
+                  <td class="p-2"><a href="{{ url('customer/orders/order', { number: order.number }) }}">Order {{ order.reference }}</a></td>
+                  <td class="p-2">{{ order.dateOrdered|date }}</td>
+                  <td class="p-2">{{ order.totalQty }} items</td>
+                  <td class="p-2">{{ order.totalPriceAsCurrency }}</td>
+              </tr>
+              <tr class="{{ rowClass }} text-sm">
+                <td class="p-2" colspan="4">
+                  <div class="border-t border-gray-300 border-dashed p-2">
+                    <h4 class="text-gray-500 tracking-wide font-mono text-xs uppercase">Items</h4>
+                    <ul>
+                      {% for item in order.lineItems %}
+                        <li>
+                          {{ item.qty }} x {{ item.description }}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+  {% else %}
+      <div class="empty-index">
+          <p class="text-lg block">You don’t have any confirmed orders yet. {% if not craft.app.request.param('status') == 'in-progress' %}<a href="{{ url('/customer/orders?status=in-progress') }}" class="text-primary underline">Click here to find your pending orders</a>{% endif %}</p>
+          <p class="text-lg block"><a href="{{ url('/') }}" class="text-primary underline mt-10 block">Go shopping</a></p>
+      </div>
+  {% endif %}
+    </div>
+  </div>
+{% endblock %}

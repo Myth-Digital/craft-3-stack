@@ -1,0 +1,22 @@
+{#
+# Commerce layout template
+# ---------------
+#}
+
+{% extends "_commerce/_layout/base" %}
+
+{% block commerceLayout %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+      
+      {# ------- Template ------- #} 
+
+      <cart-pane checkout-path="{{ siteUrl }}{{ commerce.shopPath }}checkout/"></cart-pane>
+
+      <main>
+         {% block commerceContent %}{% endblock %}
+      </main>
+
+   {%- endminify -%}
+{% endblock %}

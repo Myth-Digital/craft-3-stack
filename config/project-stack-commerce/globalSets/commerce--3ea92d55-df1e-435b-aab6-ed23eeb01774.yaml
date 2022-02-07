@@ -1,0 +1,19 @@
+fieldLayouts:
+  cd57e378-9582-4106-ba90-d5a96a12f2be:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 18725511-9c0c-4947-86bf-e5cb98a46890 # Shop Path
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Info
+        sortOrder: 1
+handle: commerce
+name: Commerce
+sortOrder: 2

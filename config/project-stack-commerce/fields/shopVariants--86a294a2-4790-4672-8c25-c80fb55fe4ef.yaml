@@ -1,0 +1,24 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: f348b0c6-b79b-4197-b9b4-054934d817f6 # Commerce
+handle: shopVariants
+instructions: ''
+name: 'Shop Variants'
+searchable: false
+settings:
+  allowLimit: false
+  allowMultipleSources: false
+  allowSelfRelations: false
+  branchLimit: ''
+  limit: null
+  localizeRelations: false
+  selectionLabel: 'Add a variant'
+  showSiteMenu: false
+  source: 'group:37e8ae52-1a1f-486d-a80b-a86acc812673' # Shop Variants
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Categories

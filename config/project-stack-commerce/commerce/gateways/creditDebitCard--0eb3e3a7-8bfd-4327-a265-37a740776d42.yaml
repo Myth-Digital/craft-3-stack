@@ -1,0 +1,11 @@
+handle: creditDebitCard
+isFrontendEnabled: true
+name: 'Credit/Debit Card'
+paymentType: purchase
+settings:
+  apiKey: $STRIPE_PUBLISHABLE_KEY
+  publishableKey: $STRIPE_API_KEY
+  sendReceiptEmail: ''
+  signingSecret: ''
+sortOrder: 99
+type: craft\commerce\stripe\gateways\PaymentIntents

@@ -1,0 +1,33 @@
+{#
+# Commerce - Product template
+# ---------------
+#}
+
+{% extends "_commerce/_layout/commerce" %}
+
+{% block commerceContent %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+
+      {% if product.relatedProducts %}
+        {% set relatedProducts = craft.products({
+          relatedTo: product.shopCategories,
+          order: 'RAND()',
+          limit: 4,
+          id: 'not ' ~ product.id
+        }) %}
+      {% else %}
+        {% set relatedProducts = product.relatedProducts %}
+      {% endif %}
+
+      {# ------- Template ------- #}
+      
+      {{ product.title }}
+
+      {% if product.relatedProducts|length %}
+        {% include "_commerce/_blocks/grid" with { products: relatedProducts, title: 'You might also like' }%}
+      {% endif %}
+
+   {%- endminify -%}
+{% endblock %}

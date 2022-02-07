@@ -1,0 +1,17 @@
+{% if craft.app.request.param('redirect') %}
+  {% set redirectInput = craft.app.request.param('redirect') %}
+{% else %}
+  {% set redirectInput = '' %}
+{% endif %}
+
+{% extends '_layout' %}
+
+{% block content %}
+    <hr />
+    <div class="container max-w-2xl mx-auto py-10">
+      <p class="block">Your Account</p>
+      <h2 class="mb-6 block">SIGN IN</h2>
+      <p class="text-lg mb-10">Don't have an account? <a href="{{ url('customer/signup') }}" class="text-primary underline ml-2">Create an account</a></p>
+      {% include 'customer/_forms/login' with { redirect_input: redirectInput } %}
+    </div>
+{% endblock %}

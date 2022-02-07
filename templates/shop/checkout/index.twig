@@ -1,0 +1,8 @@
+{% if cart is not defined %}
+	{% set cart = craft.commerce.carts.cart %}
+	{% if cart.isEmpty %}
+		{% redirect commerce.shopPath %}
+	{% else %}
+		{% redirect commerce.shopPath ~ 'checkout/payment' %}
+	{% endif %}
+{% endif %}

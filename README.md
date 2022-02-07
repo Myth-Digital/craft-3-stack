@@ -1,6 +1,6 @@
-# Craft CMS 3.x, Tailwind CSS, VueJS and AlpineJS
+# Craft CMS 3.x, Craft Commerce 3.x, Tailwind CSS, VueJS and AlpineJS
 
-This is a [Craft CMS 3.x](https://github.com/craftcms/cms) boilerplate [Myth Digital](https://myth.digital) use internally for projects. Inspired by [Made By Shape](https://madebyshape.co.uk) Craft 3 boilerplate.
+This is a [Craft CMS 3.x](https://github.com/craftcms/cms) and [Craft Commerce 3.x](https://github.com/craftcms/commerce) boilerplate [Myth Digital](https://myth.digital) use internally for projects. Originally inspired by [Made By Shape](https://madebyshape.co.uk) Craft 3 boilerplate.
 
 ## Requirements
 
@@ -10,11 +10,17 @@ This is a [Craft CMS 3.x](https://github.com/craftcms/cms) boilerplate [Myth Dig
 ## Install
 
 1. `composer create-project myth-digital/craft-3-stack`
-2. Don't run, `./craft setup`, instead manually edit the `.env` file.
-3. Once the `.env` is filled in, run `./craft install`
+2. Don't run, `./craft setup`, instead copy and edit the `.env.example` file.
+3. Once the `.env` is completed, run `./craft install`
 4. Generate the security key using `./craft setup/security-key`
-5. Replace newly created config/project with config/project-stack folder `rm -rf config/project && mv config/project-stack config/project`
+5. Replace newly created config/project with config/project-stack folder (or config/project-stack-commerce if you want commerce) `rm -rf config/project && mv config/project-stack config/project` or `rm -rf config/project && mv config/project-stack-commerce config/project`
 6. Run the project sync command to sync the db config `./craft project-config/apply`
+
+### Remove Commerce
+
+The stack ships with Commerce. The following removal script should be ran if you do not need Commerce.
+
+[] To Do - Build script
 
 ## npm Scripts
 

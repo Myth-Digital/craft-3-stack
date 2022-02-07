@@ -1,0 +1,61 @@
+<form class="form-elements" method="post" accept-charset="UTF-8">
+	{{ csrfInput() }}
+	{{ actionInput('users/save-user') }}
+	{{ redirectInput(redirect_input) }}
+
+	{% macro errorList(errors) %}
+    {% if errors %}
+      {% for error in errors %}
+      <label class="bg-red-100 bg-opacity-300 text-primary p-5 rounded-sm mt-5 w-full block">{{ error }}</label>
+      {% endfor %}
+    {% endif %}
+	{% endmacro %}
+
+	{% from _self import errorList %}
+
+  <div class="my-5 flex justify-between">
+    <div class="w-1/2 mr-2">
+      <label class="font-bold w-full block pb-2" for="firstName">First Name*</label>
+      <input class="w-full" id="firstName" type="text" name="firstName" value="" placeholder="First name" required>
+    </div>
+    <div class="w-1/2 ml-2">
+      <label class="font-bold w-full block pb-2" for="lastName">Last Name*</label>
+      <input class="w-full" id="lastName" type="text" name="lastName" value="" placeholder="Last name" required>
+    </div>
+  </div>
+
+  <div class="my-5">
+    <label class="font-bold w-full block pb-2" for="userPhoneNo">Phone Number</label>
+    <input class="w-full" type="number" id="userPhoneNo" name="fields[userPhoneNo]" value="" placeholder="Enter your phone number">
+  </div>
+
+  <div class="my-5">
+    <label class="font-bold w-full block pb-2" for="email">Email Address*</label>
+    <input class="w-full" id="email" type="email" name="email" value="" autocomplete="email" placeholder="Enter your email address" required>
+    {% if user is defined %}
+    <label class="bg-red-100 bg-opacity-300 text-primary p-5 rounded-sm mt-5 w-full block">{{ errorList(user.getErrors('email')) }}</label>
+    {% endif %}
+  </div>
+
+  <div class="my-5">
+    <label class="font-bold w-full block pb-2" for="password">Password*</label>
+    <input class="w-full" id="password" type="password" name="password" autocomplete="password" placeholder="Create a password" required>
+    {% if user is defined %}
+    <label class="bg-red-100 bg-opacity-300 text-primary p-5 rounded-sm mt-5 w-full block">{{ errorList(user.getErrors('password')) }}</label>
+    {% endif %}
+  </div>
+
+  <div class="flex my-5 items-center">
+    <input class="mr-4 w-8 h-8" type="checkbox" id="optIn" name="fields[notificationPreferences][offers]">
+    <label for="optIn" class="text-md">Click here if you'd like to opt-in to receive our exciting offers and promotions by email, you can opt-out at any time.</label><br>
+  </div>
+
+  <p class="text-sm block my-8">By creating an account you'll automatically be signed up to our reward scheme. If you are already a member of our reward scheme, enter your card number below.</p>
+
+  <div class="my-5">
+    <label class="font-bold w-full block pb-2" for="rewardCardNumber">Reward Card Number</label>
+    <input class="w-full" type="text" id="rewardCardNumber" name="fields[rewardCardNumber]" value="" placeholder="Enter your reward card number">
+  </div>
+
+  <button class="btn btn-secondary btn-solid mb-2 w-full" type="submit">Create your account</button>
+</form>

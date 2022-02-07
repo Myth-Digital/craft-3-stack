@@ -1,0 +1,63 @@
+{% extends '_layout' %}
+
+{% block content %}
+
+<div class="container mx-auto py-10"> 
+    <!-- Template: {{ _self }}.twig -->
+        {% set addressId = craft.app.request.param('addressId') %}
+        {% set redirect = craft.app.request.param('redirect') %}
+        {% set customer = craft.commerce.customers.customer %}
+        {% set customerHasAddresses = customer.addresses|length > 0 %}
+
+        {% if not address is defined and addressId %}
+            {% set address = craft.commerce.customers.customer.getAddressById(addressId) %}
+        {% endif %}
+
+        <h1 class="text-xl font-semibold">
+            {% if addressId %}
+                Edit Address
+            {% else %}
+                Add a new address
+            {% endif %}
+        </h1>
+
+        <form method="post" action="">
+            {{ csrfInput() }}
+            {{ actionInput('commerce/customer-addresses/save') }}
+            {% if redirect %}
+                {{ redirectInput(redirect) }}
+            {% else %}
+                {{ redirectInput('customer/addresses') }}
+            {% endif %}
+
+            {% if addressId %}
+                {{ hiddenInput('address[id]', addressId) }}
+            {% endif %}
+
+            {% include 'customer/_includes/addresses/form' %}
+            {% set isPrimaryBilling = cart.customer.primaryBillingAddressId == addressId %}
+            {% set isPrimaryShipping = cart.customer.primaryShippingAddressId == addressId %}
+
+            <hr class="my-3" />
+
+            {% if customerHasAddresses %}
+            <div>
+                <label for="makePrimaryBillingAddress" class="flex items-center"><input id="makePrimaryBillingAddress" class="mr-2" name="makePrimaryBillingAddress" type="checkbox" {{ isPrimaryBilling ? 'checked' :'' }}/><span class="label-body">Make this the primary billing address</span></label>
+            </div>
+            {% else %}
+                <input type="hidden" name="makePrimaryBillingAddress" id="makePrimaryBillingAddress" value="true"/>
+            {% endif %}
+
+            <div class="mt-6 flex justify-between">
+                {% if redirect %}
+                <a href="/{{ redirect }}"  class="btn btn-secondary btn-solid">Cancel</a>
+                {% else %}
+                <a href="{{ url('customer/addresses') }}"  class="btn btn-secondary btn-solid">Cancel</a>
+                {% endif %}
+            <div>
+                <input type="submit" value="Save Address"  class="btn btn-secondary btn-solid">
+            </div>
+            </div>
+        </form>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{#
+# Commerce base template
+# ---------------
+#}
+
+{% extends "_layout/global" %}
+
+{% block content %}
+   {%- minify -%}
+
+      {# ------- Variables ------- #}
+      
+      {% if cart is not defined %}
+          {% set cart = craft.commerce.carts.cart %}
+      {% endif %}
+
+      {# ------- Template ------- #}
+      {% block commerceLayout %}{% endblock %}
+
+      {# ------- Scripts ------- #}
+
+      {% cache globally %}
+         {% js at endBody %}
+            window.csrfTokenName = "{{ craft.app.config.general.csrfTokenName }}";
+            window.csrfTokenValue = "{{ craft.app.request.csrfToken }}";
+         {% endjs %}
+         {% do view.registerJsFile('https://js.stripe.com/v3/') %}
+      {% endcache %}
+      
+
+   {%- endminify -%}
+{% endblock %}

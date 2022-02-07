@@ -17,9 +17,12 @@
  * your config/ folder, alongside this one.
  */
 
+use craft\helpers\App;
+
 return [
-    'modules' => [
-        'my-module' => \modules\Module::class,
+    'id' => App::env('APP_ID') ?: 'CraftCMS',
+    'modules' => [  
+        'mythcommerce' => \mythdigital\mythcommerce\Module::class,
     ],
-    //'bootstrap' => ['my-module'],
+    'bootstrap' => ['mythcommerce']
 ];
