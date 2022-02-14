@@ -71,3 +71,7 @@ yarn-error.log*
 public/dist/js/*
 public/dist/css/*
 mix-manifest.json
+
+# Template Dev Excluded files.
+config/project
+public/dist/images
