@@ -1,4 +1,4 @@
-dateModified: 1643387999
+dateModified: 1644800770
 email:
   fromEmail: $SITE_EMAIL
   fromName: $SITE_NAME
@@ -32,6 +32,8 @@ meta:
     86a294a2-4790-4672-8c25-c80fb55fe4ef: 'Shop Variants' # Shop Variants
     89cfb321-73e7-40a6-aac0-a005390d9998: 'Enable VueJS' # Enable VueJS
     452b7e0c-8a95-46ad-94ba-88c7e4900e05: 'Shop Categories' # Shop Categories
+    484aaa7f-fad7-498d-8fe5-bea450cab53a: 'Product Description' # Product Description
+    565fbd9e-e73b-41c2-8dd1-79a9e7abc308: Brand # Brand
     90552b17-3ba7-452a-9dfd-0b13004b4659: 'Page - Block Content' # Page - Block Content
     18725511-9c0c-4947-86bf-e5cb98a46890: 'Shop Path' # Shop Path
     a4cade2e-b351-4d0b-8087-3328bc132811: Page # Page
@@ -39,6 +41,7 @@ meta:
     a6548a8e-edd2-4cbb-9200-db7de2726f75: Common # Common
     b08b5d93-e934-4018-a028-6930ba8ddcb0: New # New
     b59ae72a-8b0b-4bb9-83b9-a351b70b54a7: Site # Site
+    caf3284e-dc22-4e85-8335-117381fd7bb2: 'Shop Brands' # Shop Brands
     cc3aedd1-0bcd-4a0d-9843-8ee6c26d1563: 'Related Products' # Related Products
     d22d8c4e-5130-4bb2-afad-a7c08be98605: Images # Images
     d6471ab8-0d49-45bf-af5d-f0d2a860e267: 'Meta & Social Data' # Meta & Social Data

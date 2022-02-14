@@ -34,6 +34,15 @@ productFieldLayouts:
             warning: null
             width: 100
           -
+            fieldUid: 484aaa7f-fad7-498d-8fe5-bea450cab53a # Product Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
             fieldUid: 044a1f22-3ee8-4e03-870e-df6642a6b47b # Product Images
             instructions: null
             label: null
@@ -60,6 +69,15 @@ productFieldLayouts:
             instructions: ''
             label: Categories
             required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 565fbd9e-e73b-41c2-8dd1-79a9e7abc308 # Brand
+            instructions: null
+            label: null
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
