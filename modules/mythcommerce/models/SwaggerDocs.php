@@ -3,6 +3,57 @@
 namespace mythdigital\mythcommerce\models;
 
 /**
+ * Represents a customer address.
+ * @SWG\Definition(title="CommerceAddress")
+ *
+ * @SWG\Property(property="id", type="string")
+ * @SWG\Property(property="isStoreLocation", type="boolean")
+ * @SWG\Property(property="attention", type="string")
+ * @SWG\Property(property="title", type="string")
+ * @SWG\Property(property="firstName", type="string")
+ * @SWG\Property(property="lastName", type="string")
+ * @SWG\Property(property="fullName", type="string")
+ * @SWG\Property(property="address1", type="string")
+ * @SWG\Property(property="address2", type="string")
+ * @SWG\Property(property="address3", type="string")
+ * @SWG\Property(property="city", type="string")
+ * @SWG\Property(property="zipCode", type="string")
+ * @SWG\Property(property="phone", type="string")
+ * @SWG\Property(property="alternativePhone", type="string")
+ * @SWG\Property(property="label", type="string")
+ * @SWG\Property(property="businessName", type="string")
+ * @SWG\Property(property="businessTaxId", type="string")
+ * @SWG\Property(property="businessId", type="string")
+ * @SWG\Property(property="stateName", type="string")
+ * @SWG\Property(property="countryId", type="string")
+ * @SWG\Property(property="stateId", type="string")
+ * @SWG\Property(property="notes", type="string")
+ * @SWG\Property(property="custom1", type="string")
+ * @SWG\Property(property="custom2", type="string")
+ * @SWG\Property(property="custom3", type="string")
+ * @SWG\Property(property="custom4", type="string")
+ * @SWG\Property(property="isEstimated", type="string")
+ * @SWG\Property(property="stateValue", type="string")
+ * @SWG\Property(property="countryIso", type="string")
+ * @SWG\Property(property="countryText", type="string")
+ * @SWG\Property(property="stateText", type="string")
+ * @SWG\Property(property="abbreviationText", type="string")
+ * @SWG\Property(property="addressLines", type="array", @SWG\Items(type="string"))
+ */
+class CommerceAddress {}
+
+/**
+ * Represents a customer address to be stored.
+ * @SWG\Definition(title="StoreCommerceAddress")
+ *
+ * @SWG\Property(property="makePrimaryBillingAddress", type="boolean")
+ * @SWG\Property(property="makePrimaryShippingAddress", type="boolean")
+ * @SWG\Property(property="success", type="boolean")
+ * @SWG\Property(property="address", ref="#/definitions/CommerceAddress")
+ */
+class StoreCommerceAddress {}
+
+/**
  * Represents a customer order.
  * 
  * @SWG\Definition(title="CommerceOrder")
@@ -140,6 +191,67 @@ class CommerceOrder {}
  * @SWG\Property(property="cart", ref = "#/definitions/CommerceOrder")
  */
 class CommerceOrderResponse {}
+
+/**
+ * Represents an order adjustment.
+ * @SWG\Definition(title="CommerceOrderAdjustment")
+ *
+ * @SWG\Property(property="id", type="integer")
+ * @SWG\Property(property="name", type="string")
+ * @SWG\Property(property="description", type="string")
+ * @SWG\Property(property="type", type="string")
+ * @SWG\Property(property="amount", type="number")
+ * @SWG\Property(property="included", type="boolean")
+ * @SWG\Property(property="orderId", type="integer")
+ * @SWG\Property(property="lineItemId", type="integer")
+ * @SWG\Property(property="isEstimated", type="boolean")
+ * @SWG\Property(property="sourceSnapshot", type="object")
+ * @SWG\Property(property="amountAsCurrency", type="string")
+ */
+class CommerceOrderAdjustment {}
+
+/**
+ * Represents an order line item.
+ * @SWG\Definition(title="CommerceOrderLineItem")
+ *
+ * @SWG\Property(property="id", type="integer")
+ * @SWG\Property(property="weight", type="number")
+ * @SWG\Property(property="length", type="number")
+ * @SWG\Property(property="height", type="number")
+ * @SWG\Property(property="width", type="number")
+ * @SWG\Property(property="qty", type="integer")
+ * @SWG\Property(property="note", type="string")
+ * @SWG\Property(property="privateNote", type="string")
+ * @SWG\Property(property="purchasableId", type="integer")
+ * @SWG\Property(property="orderId", type="integer")
+ * @SWG\Property(property="lineItemStatusId", type="integer")
+ * @SWG\Property(property="taxCategoryId", type="integer")
+ * @SWG\Property(property="shippingCategoryId", type="integer")
+ * @SWG\Property(property="dateCreated", type="string")
+ * @SWG\Property(property="dateUpdated", type="string")
+ * @SWG\Property(property="adjustments", type="array", @SWG\Items(ref = "#/definitions/CommerceOrderAdjustment"))
+ * @SWG\Property(property="description", type="string")
+ * @SWG\Property(property="options", type="object")
+ * @SWG\Property(property="optionsSignature", type="string")
+ * @SWG\Property(property="onSale", type="boolean")
+ * @SWG\Property(property="price", type="number")
+ * @SWG\Property(property="saleAmount", type="number")
+ * @SWG\Property(property="salePrice", type="number")
+ * @SWG\Property(property="sku", type="string")
+ * @SWG\Property(property="total", type="number")
+ * @SWG\Property(property="priceAsCurrency", type="string")
+ * @SWG\Property(property="saleAmountAsCurrency", type="string")
+ * @SWG\Property(property="salePriceAsCurrency", type="string")
+ * @SWG\Property(property="subtotalAsCurrency", type="string")
+ * @SWG\Property(property="totalAsCurrency", type="string")
+ * @SWG\Property(property="discountAsCurrency", type="string")
+ * @SWG\Property(property="shippingCostAsCurrency", type="string")
+ * @SWG\Property(property="taxAsCurrency", type="string")
+ * @SWG\Property(property="taxIncludedAsCurrency", type="string")
+ * @SWG\Property(property="adjustmentsTotalAsCurrency", type="string")
+ * @SWG\Property(property="subtotal", type="number")
+ */
+class CommerceOrderLineItem {}
 
 /**
  * Represents a payment source to be added.

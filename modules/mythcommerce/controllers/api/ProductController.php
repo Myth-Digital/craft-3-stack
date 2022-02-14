@@ -4,10 +4,14 @@ namespace mythdigital\mythcommerce\controllers\api;
 
 use Craft;
 use craft\commerce\elements\Product;
+use craft\commerce\elements\Variant;
 use craft\elements\Category;
 use mythdigital\mythcommerce\models\CommerceProduct;
 use mythdigital\mythcommerce\models\CommerceProductList;
 use mythdigital\mythcommerce\helpers\MapperHelpers;
+use mythdigital\mythcommerce\models\CommerceProductSearchRequest;
+use mythdigital\mythcommerce\Module;
+use mythdigital\mythcommerce\services\ProductService;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -24,6 +28,13 @@ class ProductController extends ApiController
      */
     protected $allowAnonymous = true;
 
+    /**
+     * Product Service.
+     *
+     * @var ProductService
+     */
+    private $productService;
+
     #endregion
 
     #region Init
@@ -34,60 +45,119 @@ class ProductController extends ApiController
     public function init()
     {
         parent::init();
+
+        $module = Module::getInstance();
+        $this->productService = $module->getProductService();
     }
 
     #endregion
 
     #region Actions
 
-    
     /**
-     * GET /products/
+     * Searches for products.
+     * 
+     * @SWG\Get(path="/product/search/<productCategory>",
+     *     tags={"Product"},
+     *     summary="Searches for products based on a set of criteria.",
+     *     @SWG\Parameter(
+     *         description="The root category to search by slug or ID.",
+     *         in="path",
+     *         name="id",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         description="A search query",
+     *         in="query",
+     *         name="query",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         description="A paging offset. Defaults to 0",
+     *         in="query",
+     *         name="offset",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         description="A page size. Defaults to the configured value",
+     *         in="query",
+     *         name="limit",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         description="An array of child categories to filter on",
+     *         in="query",
+     *         name="childCategory",
+     *         required=false,
+     *         type="array",
+     *         @SWG\Items(type = "string")
+     *     ),
+     *     @SWG\Parameter(
+     *         description="An array of variant categories to filter on",
+     *         in="query",
+     *         name="filterCategory",
+     *         required=false,
+     *         type="array",
+     *         @SWG\Items(type = "string")
+     *     ),
+     *     @SWG\Parameter(
+     *         description="An array of brand categories to filter on",
+     *         in="query",
+     *         name="brandCategory",
+     *         required=false,
+     *         type="array",
+     *         @SWG\Items(type = "string")
+     *     ),
+     *     @SWG\Parameter(
+     *         description="The sort preference",
+     *         in="query",
+     *         name="sort",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "The product search results",
+     *         @SWG\Schema(ref = "#/definitions/CommerceProductList")
+     *     ),
+     * )
+     * 
      */
-
-    public function actionIndex($productCategory)
+    public function actionIndex($productCategory = null)
     {
+        $this->requireAcceptsJson();
+        $this->requireGetRequest();
+
         $request = Craft::$app->getRequest();
 
+        $searchQuery = $request->getQueryParam('query', '');
         $offset = $request->getQueryParam('offset', 0);
         $limit = $request->getQueryParam('limit', Craft::$app->config->general->defaultPageSize);
-        $searchQuery = $request->getQueryParam('query', '');
+        $childCategory = $request->getQueryParam('childCategory', []);
+        $filterCategory = $request->getQueryParam('filterCategory', []);
+        $brandCategory = $request->getQueryParam('brandCategory', []);
+        $orderBy = $request->getQueryParam('sort', 'mostRelevant');
 
-        if ($limit > Craft::$app->config->general->maxPageSize) {
-            $limit = Craft::$app->config->general->maxPageSize;
-        }
+        $request = new CommerceProductSearchRequest();
 
-        $existingCategory = Category::find()->group('shopCategories')
-        ->where([
-            'elements.id' => $productCategory
-        ])
-        ->orWhere(['slug' => $productCategory])
-        ->first();
+        $request->rootCategory = $productCategory;
+        $request->query = $searchQuery;
+        $request->offset = $offset;
+        $request->limit = $limit;
+        $request->childCategory = $childCategory;
+        $request->filterCategory = $filterCategory;
+        $request->brandCategory = $brandCategory;
+        $request->sort = $orderBy;
 
-        if (empty($existingCategory)) return $this->asJson([]);
-        
-        $productQuery = Product::find()->relatedTo($existingCategory);
+        $results = $this->productService->searchProducts($request);
 
-        if (!empty($searchQuery)) {
-            $productQuery = $productQuery->andWhere(['like', 'title', $searchQuery]);
-        }
-
-        if (!empty($recommendedUserLevel)) {
-            $productCategory = $productQuery->andWhere(['like', 'content.field_productRecommendationUserLevel', $recommendedUserLevel]);
-        }
-
-        $products = $productQuery
-            ->offset($offset)
-            ->limit($limit)
-            ->all();
-
-        $mappedProducts = array_map(function($p) {
-            return MapperHelpers::mapProduct($p);
-        }, $products);
-
-        return $this->asJson($mappedProducts);
+        return $this->asJson($results);
     }
-
+    
     /**
      * Gets a single product by its ID.
      * 
@@ -123,94 +193,6 @@ class ProductController extends ApiController
 
         $model = new CommerceProduct();
         $model->populateFromProduct($product);
-
-        return $this->asJson($model);
-    }
-
-
-    /**
-     * Searches for products.
-     *
-     * @SWG\Get(path="/product/search",
-     *     tags={"Product"},
-     *     summary="Retrieves the product with the specified ID.",
-     *     @SWG\Parameter(
-     *         description="The search query.",
-     *         in="query",
-     *         name="query",
-     *         required=true,
-     *         type="string",
-     *     ),
-     *     @SWG\Parameter(
-     *         description="The number of items to take.",
-     *         in="query",
-     *         name="take",
-     *         required=false,
-     *         type="integer",
-     *     ),
-     *     @SWG\Parameter(
-     *         description="The number of items to skip.",
-     *         in="query",
-     *         name="skip",
-     *         required=false,
-     *         type="integer",
-     *     ),
-     *     @SWG\Parameter(
-     *         description="The product types to include.",
-     *         in="query",
-     *         name="type",
-     *         required=false,
-     *         type="array",
-     *         @SWG\Items(type = "string")
-     *     ),
-     *     @SWG\Response(
-     *         response = 200,
-     *         description = "The product",
-     *         @SWG\Schema(ref = "#/definitions/CommerceProductList")
-     *     )
-     * )
-     * 
-     */
-    public function actionSearchProducts()
-    {
-        $this->requireAcceptsJson();
-        $this->requireGetRequest();
-
-        $query = $this->request->getQueryParam('query', null);
-        $take = $this->request->getQueryParam('take', 10);
-        $skip = $this->request->getQueryParam('skip', 0);
-
-        $productQuery = Product::find()
-            ->orderBy(['title' => SORT_ASC, 'defaultPrice' => SORT_ASC ]);
-
-        if (!empty($query)) {
-            $productQuery = $productQuery->search($query);
-        }
-
-        if (!empty($skip)) {
-            $productQuery = $productQuery->offset($skip);
-        }
-
-        if (!empty($take)) {
-            $productQuery = $productQuery->limit($take);
-        }
-
-        $totalCount = $productQuery->count();
-        $allResults = $productQuery->all();
-
-        $model = new CommerceProductList();
-
-        $model->total = $totalCount;
-        $model->skip = $skip;
-        $model->take = $take;
-        $model->products = [];
-
-        /** @var Product $product */
-        foreach ($allResults as $product) {
-            $productModel = new CommerceProduct();
-            $productModel->populateFromProduct($product);
-            $model->products[] = $productModel;
-        }
 
         return $this->asJson($model);
     }

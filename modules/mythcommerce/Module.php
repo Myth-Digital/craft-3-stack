@@ -8,6 +8,7 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\events\DefineRulesEvent;
 use craft\commerce\models\Address;
 use craft\web\twig\variables\CraftVariable;
+use mythdigital\mythcommerce\services\ProductService;
 use mythdigital\mythcommerce\variables\MythCommerceVariable;
 use yii\base\Event;
 
@@ -49,6 +50,14 @@ class Module extends \yii\base\Module
 
         #endregion
 
+        #region Components
+
+        $this->setComponents([
+            'productservice' => ProductService::class,
+        ]);
+
+        #endregion
+
         #region Event Handlers
 
         Event::on(
@@ -69,6 +78,16 @@ class Module extends \yii\base\Module
     #endregion
 
     #region Methods
+
+    /**
+     * Returns the Product service
+     *
+     * @return ProductService The Product service
+     */
+    public function getProductService(): ProductService
+    {
+        return $this->get('productservice');
+    }
 
     /**
      * Registers address validation rules with Craft.
@@ -160,8 +179,9 @@ class Module extends \yii\base\Module
 
         #region Products
 
-        $event->rules["$apiBase/product/search"] = ['route' => 'mythcommerce/api/product/search-products', 'verb' => ['GET', 'OPTIONS']];
-        $event->rules["$apiBase/product/<id>"] = ['route' => 'mythcommerce/api/product/get-product', 'verb' => ['GET', 'OPTIONS']];
+        $event->rules["$apiBase/product/<id:\d+>"] = ['route' => 'mythcommerce/api/product/get-product', 'verb' => ['GET', 'OPTIONS']];
+        $event->rules["$apiBase/product/search"] = ['route' => 'mythcommerce/api/product/index', 'verb' => ['GET', 'OPTIONS']];
+        $event->rules["$apiBase/product/search/<productCategory>"] = ['route' => 'mythcommerce/api/product/index', 'verb' => ['GET', 'OPTIONS']];
 
         #endregion
     }

@@ -12,8 +12,10 @@ use craft\elements\MatrixBlock;
  * @SWG\Definition(title="CommerceProductList")
  *
  * @SWG\Property(property="total", type="integer"),
- * @SWG\Property(property="currentPage", type="integer"),
+ * @SWG\Property(property="limit", type="integer"),
+ * @SWG\Property(property="offset", type="integer"),
  * @SWG\Property(property="products", type="array", @SWG\Items(ref = "#/definitions/CommerceProduct"))
+ * @SWG\Property(property="rootCategoryTree", ref="#/definitions/CommerceProductSearchMetadata"),
  */
 class CommerceProductList extends Model
 {
@@ -31,14 +33,14 @@ class CommerceProductList extends Model
      *
      * @var int
      */
-    public $take;
+    public $limit;
 
     /**
      * The number of items to skip.
      *
      * @var int
      */
-    public $skip;
+    public $offset;
 
     /**
      * The products
@@ -46,6 +48,13 @@ class CommerceProductList extends Model
      * @var array
      */
     public $products;
+
+    /**
+     * The metadata
+     *
+     * @var CommerceProductSearchMetadata
+     */
+    public $metadata;
 
     #endregion
 }

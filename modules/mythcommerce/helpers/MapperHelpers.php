@@ -8,27 +8,6 @@ use craft\commerce\elements\Product;
 class MapperHelpers
 {
     /**
-     * Maps a product for use on the client side.
-     *
-     * @param Product $product
-     * @return array a mapped product.
-     */
-    public static function mapProduct(Product $product)
-    {
-        $productInfo = [
-            "title" => $product->title,
-            "description" => $product->productDescription,
-            "productId" => $product->id,
-            "defaultPurchaseId" => $product->defaultVariant->id,
-            "url" => $product->url,
-            "price" => $product->defaultVariant->price,
-            "salePrice" => $product->defaultVariant->salePrice,
-        ];
-
-        return $productInfo;
-    }
-
-    /**
      * Re-works an order array for use on the API
      *
      * @param Order $order
