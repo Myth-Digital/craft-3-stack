@@ -108,6 +108,7 @@
         "vue-jam-icons": "^1.0.1",
         "vue-loading-spinner": "^1.0.11",
         "vue-money-format": "^1.1.1",
+        "vue-router": "^3.5.3",
         "vue-slick": "^1.1.15",
         "vue-stripe-elements-plus": "^0.3.2",
         "vue-stripe-payment": "^0.2.0",

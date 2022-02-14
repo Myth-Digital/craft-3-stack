@@ -21,6 +21,7 @@ use craft\fields\data\MultiOptionsFieldData;
  * @SWG\Property(property="productType", type="string")
  * @SWG\Property(property="productTypeHandle", type="string")
  * @SWG\Property(property="title", type="string")
+ * @SWG\Property(property="url", type="string")
  * @SWG\Property(property="imageUrls", type="array", @SWG\Items(type = "string"))
  * @SWG\Property(property="description", type="string")
  * @SWG\Property(property="price", type="number")
@@ -65,6 +66,13 @@ class CommerceProduct extends Model
      * @var string
      */
     public $title;
+
+    /**
+     * The product url.
+     *
+     * @var string
+     */
+    public $url;
 
     /**
      * The image URLs.
@@ -116,6 +124,7 @@ class CommerceProduct extends Model
         $this->productId = $product->id;
         $this->purchasableId = $product->defaultVariantId;
         $this->title = $product->title;
+        $this->url = $product->url;
         $this->productType = $product->getType()->name;
         $this->productTypeHandle = $product->getType()->handle;
         $this->imageUrls = [];

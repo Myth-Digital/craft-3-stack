@@ -12,6 +12,7 @@ use mythdigital\mythcommerce\helpers\MapperHelpers;
 use mythdigital\mythcommerce\models\CommerceProductSearchRequest;
 use mythdigital\mythcommerce\Module;
 use mythdigital\mythcommerce\services\ProductService;
+use mythdigital\mythcommerce\variables\MythCommerceVariable;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -132,26 +133,9 @@ class ProductController extends ApiController
         $this->requireAcceptsJson();
         $this->requireGetRequest();
 
-        $request = Craft::$app->getRequest();
+        $commerceVariable = new MythCommerceVariable();
 
-        $searchQuery = $request->getQueryParam('query', '');
-        $offset = $request->getQueryParam('offset', 0);
-        $limit = $request->getQueryParam('limit', Craft::$app->config->general->defaultPageSize);
-        $childCategory = $request->getQueryParam('childCategory', []);
-        $filterCategory = $request->getQueryParam('filterCategory', []);
-        $brandCategory = $request->getQueryParam('brandCategory', []);
-        $orderBy = $request->getQueryParam('sort', 'mostRelevant');
-
-        $request = new CommerceProductSearchRequest();
-
-        $request->rootCategory = $productCategory;
-        $request->query = $searchQuery;
-        $request->offset = $offset;
-        $request->limit = $limit;
-        $request->childCategory = $childCategory;
-        $request->filterCategory = $filterCategory;
-        $request->brandCategory = $brandCategory;
-        $request->sort = $orderBy;
+        $request = $commerceVariable->buildProductSearchRequest($productCategory);
 
         $results = $this->productService->searchProducts($request);
 

@@ -10,23 +10,36 @@
 
       {# ------- Variables ------- #}
 
-      {% set products = craft.products %}
+      {% set productSearchRequest = craft.mythcommerce.buildProductSearchRequest(category.slug) %}
+
+      {% set productList = craft.mythcommerce.doProductSearch(productSearchRequest) %}
+      {% set products = productList.products %}
 
       {# ------- Template ------- #}
 
-      <div class="products-grid" x-data="{ hideFilters: false }">
-         {% include "_commerce/_blocks/sorting" %}
-         
-         <div class="flex flex-col md:flex-row px-10 py-5">
-            <div class="products-grid__filters w-72 flex-initial" x-show="!hideFilters">
-               {% include "_commerce/_blocks/filters" %}
-            </div>
+      <catalogue-shell :initial-request="{{ productSearchRequest|json_encode }}" :initial-results="{{ productList|json_encode }}">
+
+         <div class="products-grid" x-data="{ hideFilters: false }">
+            <catalogue-sorting></catalogue-sorting>
             
-            <div class="products-grid__products w-full flex-1">
-               {% include "_commerce/_blocks/grid" with { products: products, grid: 'grid-cols-3' } %}
+            <div class="flex flex-col md:flex-row px-10 py-5">
+               <div class="products-grid__filters w-72 flex-initial" x-show="!hideFilters">
+                  <catalogue-filters></catalogue-filters>
+               </div>
+               
+               <div class="products-grid__products w-full flex-1">
+                  <catalogue-grid>
+                     <div class="products grid gap-3 gap-y-9 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+                        {% for product in products %}
+                        {% include '_commerce/_components/productCard' %}
+                        {% endfor %}
+                     </div>
+                  </catalogue-grid>
+               </div>
             </div>
          </div>
-      </div>
+
+      </catalogue-shell>
 
    {%- endminify -%}
 {% endblock %}

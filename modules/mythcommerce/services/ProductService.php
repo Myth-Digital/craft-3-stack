@@ -259,7 +259,12 @@ class ProductService extends Component
         
         #region Get the brand categories
 
-        $brandCategories = Category::find()->group(ProductService::SHOP_BRANDS_GROUP)->relatedTo($matchingProductIds)->all();
+        $allProductsForCategoryRoot = Product::find()->relatedTo($resolvedRootCategory)->all();
+        $allProductIdsForCategoryRoot = array_map(function(Product $p) {
+            return $p->id;
+        }, $allProductsForCategoryRoot);
+
+        $brandCategories = Category::find()->group(ProductService::SHOP_BRANDS_GROUP)->relatedTo($allProductIdsForCategoryRoot)->all();
 
         $model->brandCategories = array_map(function(Category $c) {
             $categoryModel = new CommerceCategory();

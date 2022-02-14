@@ -34,6 +34,13 @@ import CardAddToCart from './commerce/modules/product/CardAddToCart';
 import SearchVeil from './commerce/modules/search/SearchVeil';
 import SearchInput from './commerce/modules/search/SearchInput';
 
+// Catalogue
+import CatalogueShell from './commerce/modules/catalogue/CatalogueShell';
+import CatalogueFilters from './commerce/modules/catalogue/CatalogueFilters';
+import CatalogueSorting from './commerce/modules/catalogue/CatalogueSorting';
+import CatalogueProductCard from './commerce/modules/catalogue/CatalogueProductCard';
+import CatalogueGrid from './commerce/modules/catalogue/CatalogueGrid';
+
 // Components
 import InputButton from './commerce/modules/checkout/components/form/Button';
 import InputField from './commerce/modules/checkout/components/form/Input';
@@ -79,6 +86,13 @@ Vue.component('cart-main', CartMain);
 Vue.component('account-new-card', NewCard);
 Vue.component('search-veil', SearchVeil);
 Vue.component('search-input', SearchInput);
+
+// Catalogue Components
+Vue.component('catalogue-shell', CatalogueShell);
+Vue.component('catalogue-filters', CatalogueFilters);
+Vue.component('catalogue-sorting', CatalogueSorting);
+Vue.component('catalogue-product-card', CatalogueProductCard);
+Vue.component('catalogue-grid', CatalogueGrid);
 
 Vue.mixin(CartErrors);
 Vue.mixin(ArrayHelpers);

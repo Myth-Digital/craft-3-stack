@@ -7,7 +7,7 @@ import auth from './modules/auth';
 import cart from '../commerce/store/modules/cart';
 import paymentSources from '../commerce/store/modules/payment-sources';
 import standingData from '../commerce/store/modules/standing-data';
-import products from '../commerce/store/modules/products';
+import catalogue from '../commerce/store/modules/catalogue';
 
 Vue.use(Vuex);
 
@@ -17,6 +17,6 @@ export default new Vuex.Store({
         cart,
         paymentSources,
         standingData,
-        products
+        catalogue
     }
 });
